@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, {lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch, // for server rendering
+  Route,
+  Redirect,
+} from "react-router-dom";
+import "./App.css";
+import store from "./components/redux/store";
+import Navbar from "./components/Navbar/Navbar";
+// import SingleGif from "./pages/SingleGif/SingleGif";
+ 
+const Home = lazy(() => import("./pages/Home"));
+const SingleGif= lazy(() => import("./pages/SingleGif/SingleGif"));
+ 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback ='LOADING'>
+      <Provider store={store}>
+        <React.Fragment>
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/gif/:id" component={SingleGif} />
+            </Switch>
+          </Router>
+        </React.Fragment>
+      </Provider>
+    </Suspense>
   );
 }
 
