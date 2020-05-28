@@ -1,4 +1,8 @@
-
+import React from "react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import { render, fireEvent, cleanup } from "@testing-library/react";
+import Search from "./index";
 import {
   GET_FAIL,
   GET_SUCCESS,
@@ -9,15 +13,9 @@ import {
   CLEAR_FILTER,
   LOAD_NEXT,
   LOAD_ERROR
-} from "../types";
-export interface Istate {
-  dataArray: any[];
-  dataObj: {};
-  loading: boolean;
-  error: boolean;
-  filter: any[];
-}
-const initialState = {
+} from "../../components/redux/types";
+
+const initial = {
   dataArray: [],
   dataObj: null,
   loading: true,
@@ -25,7 +23,7 @@ const initialState = {
   filter: [],
 };
 
-function GiphyReducer(state = initialState, action: any) {
+function reducer(state:any, action: any) {
   switch (action.type) {
     case GET_SUCCESS:
       return {
@@ -76,4 +74,28 @@ function GiphyReducer(state = initialState, action: any) {
   }
 }
 
-export default GiphyReducer;
+function renderWithRedux(
+  ui:any,
+  {
+    initialState=initial,
+    store= createStore(reducer, initial)
+    
+  } = {}
+) {
+  return { ...render(<Provider store={store}> {ui}</Provider>) };
+}
+
+it("renders correctly", () => {
+  const { queryByTestId, queryByPlaceholderText } = renderWithRedux(<Search />);
+  expect(queryByTestId("search-button")).toBeTruthy();
+  expect(queryByPlaceholderText("Search")).toBeTruthy();
+});
+
+describe("input value", () => {
+  it("updates on change", () => {
+    const { queryByPlaceholderText } = renderWithRedux(<Search />);
+    const searchInput: any = queryByPlaceholderText("Search");
+    fireEvent.change(searchInput, { target: { value: "test" } });
+    expect(searchInput.value).toBe("test");
+  });
+});

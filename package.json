@@ -25,10 +25,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "build:css": "node-sass src/ -o src/ ",
-    "watch:css": "yarn build:css && node-sass src/ -o src/ -w -r",
     "start": "react-scripts start",
-    "startall": "yarn watch:css && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

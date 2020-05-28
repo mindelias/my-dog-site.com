@@ -48,7 +48,7 @@ const Search: React.FC<props> = ({ filter, clear ,load}) => {
         value={search}
         onChange={onChangeInput}
       />
-      <button type="submit">Search</button>
+      <button data-testid = 'search-button' type="submit">Search</button>
     </FilterWrapper>
   );
 };
