@@ -1,0 +1,73 @@
+import React from "react";
+
+import {
+  GET_FAIL,
+  GET_SUCCESS,
+  FILTER_FAIL,
+  FILTER_SUCCESS,
+  GET_SINGLE_FAIL,
+  GET_SINGLE_SUCCESS,
+  CLEAR_FILTER
+} from "../types";
+export interface Istate {
+  dataArray: any[];
+  dataObj: {};
+  loading: boolean;
+  error: boolean;
+  filter: any[];
+}
+const initialState = {
+  dataArray: [],
+  dataObj: null,
+  loading: true,
+  error: false,
+  filter: [],
+};
+
+function GiphyReducer(state = initialState, action: any) {
+  switch (action.type) {
+    case GET_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        dataArray: action.payload,
+        // filter:[]
+        
+      };
+    case FILTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        filter: action.payload,
+        // dataArray:[]
+        
+      };
+
+    case GET_SINGLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        dataObj: action.payload,
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filter: [],
+      };
+
+    case GET_FAIL:
+    case GET_SINGLE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        dataArray: null,
+        dataObj: null,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
+export default GiphyReducer;
