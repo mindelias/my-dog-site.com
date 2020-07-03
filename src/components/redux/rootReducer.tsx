@@ -1,4 +1,3 @@
-import React from "react";
 import { combineReducers } from "redux";
 import GiphyReducer from "./Giphy/giphy.reducer";
  

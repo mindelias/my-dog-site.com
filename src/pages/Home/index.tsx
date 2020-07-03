@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./style.tsx";
 import DisplayGifs from '../../components/gifCard'
 import HomeWrapper from './style'
@@ -8,7 +8,7 @@ import Search from '../../components/Search'
 
 function Home() {
 
-  const  [ search, setSearch ] = useState()
+  
   return (
     <HomeWrapper className="homepage">
       <div className="homepage-container">

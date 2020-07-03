@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { loadGifs, ClearFilter,loadnext } from "../redux/Giphy/giphy.action";
+import { loadGifs, ClearFilter, loadnext } from "../redux/Giphy/giphy.action";
 import GifItem from "./gifItem";
 import GifWrapper from "./style";
 import Placeholder from "../../components/Placeholder";
@@ -23,14 +23,15 @@ const DisplayGifs: React.FC<props> = ({
   error,
   filter,
   loading,
-  ClearFilter
+  ClearFilter,
 }) => {
   console.log(data, filter);
   useEffect(() => {
     loadGif();
+    // eslint-disable-next-line
   }, [filter]);
 
-  const handlePaginationChange = (_:any, arg:any) => {
+  const handlePaginationChange = (_: any, arg: any) => {
     loadnext(arg.activePage);
   };
 
@@ -62,7 +63,6 @@ const DisplayGifs: React.FC<props> = ({
   );
 };
 
- 
 const mapStateToProps = (state: any) => ({
   data: state.Giphy.dataArray,
   error: state.Giphy.error,
@@ -70,4 +70,8 @@ const mapStateToProps = (state: any) => ({
   filter: state.Giphy.filter,
 });
 
-export default connect(mapStateToProps, { loadGif: loadGifs ,ClearFilter, loadnext})(DisplayGifs);
+export default connect(mapStateToProps, {
+  loadGif: loadGifs,
+  ClearFilter,
+  loadnext,
+})(DisplayGifs);

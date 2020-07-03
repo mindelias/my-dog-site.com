@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, {  useState } from "react";
 import { connect } from "react-redux";
 import { Istate } from "../redux/Giphy/giphy.reducer";
 import { FilterGifs, ClearFilter, loadGifs } from "../redux/Giphy/giphy.action";

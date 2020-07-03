@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch, // for server rendering
   Route,
-  Redirect,
 } from "react-router-dom";
 import "./App.css";
 import store from "./components/redux/store";

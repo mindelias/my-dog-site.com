@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { loadSingleGifs } from "../../components/redux/Giphy/giphy.action";
@@ -20,6 +20,7 @@ const SingleGif: React.FC<props> = ({ load, item, loading }) => {
 
   useEffect(() => {
     load(id);
+    // eslint-disable-next-line
   }, [id]);
 
   return (
@@ -61,7 +62,7 @@ const SingleGif: React.FC<props> = ({ load, item, loading }) => {
             <span>Date:</span> {item ? item.import_datetime : ""}
           </p>
           <p>
-            <span>is_verified:</span> {item ? item.user.is_verified: ""}
+            <span>is_verified:</span> {item ? item.user.is_verified : ""}
           </p>
 
           <p></p>
