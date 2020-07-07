@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HomeWrapper = styled.div`
   /* background: linear-gradient(to right bottom, #3b0831, #450b2a); */
-  background: #A8BAC1;
+  background: #e6eeff;
   min-height: 100vh;
   color: white;
   padding: 8rem;

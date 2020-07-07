@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import GiphyReducer from "./Giphy/giphy.reducer";
+import GiphyReducer from "./ImagesRedux/getImages.reducer";
  
 export default combineReducers({
   Giphy: GiphyReducer,

@@ -69,7 +69,7 @@ export const loadSingleGifs = (id: any, data: any) => async (dispatch: any) => {
   } catch (error) {
     dispatch({
       type: GET_SINGLE_FAIL,
-      payload: 'something went wrong',
+      payload: "something went wrong",
     });
     console.log(error.response);
   }

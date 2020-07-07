@@ -6,7 +6,7 @@ const NavWrapper = styled.div`
   h1 a {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 900;
     color: #3b0831;
   }

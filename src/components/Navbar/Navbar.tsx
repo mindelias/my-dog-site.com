@@ -7,7 +7,7 @@ function Navbar() {
       <div className="nav-container">
         <h1>
           <a className="logo" href="/">
-            <span className="fas fa-laugh-wink"></span>
+            <span className="fas fa-paw"></span>
              My-Dog-Site.com
           </a>
         </h1>

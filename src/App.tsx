@@ -11,7 +11,7 @@ import Navbar from "./components/Navbar/Navbar";
 // import SingleGif from "./pages/SingleGif/SingleGif";
  
 const Home = lazy(() => import("./pages/Home"));
-const SingleGif= lazy(() => import("./pages/SingleGif/SingleGif"));
+const SingleDogImage= lazy(() => import("./pages/SingleDogImage/SingleDogImage"));
  
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/gif/:index" component={SingleGif} />
+              <Route exact path="/gif/:index" component={SingleDogImage} />
             </Switch>
           </Router>
         </React.Fragment>

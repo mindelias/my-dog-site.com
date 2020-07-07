@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { loadGifs, ClearFilter, loadnext } from "../redux/Giphy/giphy.action";
-import GifItem from "./gifItem";
+import { loadGifs, ClearFilter, loadnext } from "../redux/ImagesRedux/getImages.action";
+import GifItem from "./ImageCard";
 import GifWrapper from "./style";
-import Placeholder from "../../components/Placeholder";
+import Placeholder from "../Placeholder";
 import { Grid, Pagination } from "semantic-ui-react";
 import { useState } from "react";
 
