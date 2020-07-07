@@ -5,9 +5,10 @@ import GifItem from "./gifItem";
 import GifWrapper from "./style";
 import Placeholder from "../../components/Placeholder";
 import { Grid, Pagination } from "semantic-ui-react";
+import { useState } from "react";
 
 interface props {
-  loadnext: (args: any) => void;
+  loadnext: (args: any, args2:any) => void;
   loading: boolean;
   data: any;
   error: boolean;
@@ -25,21 +26,24 @@ const DisplayGifs: React.FC<props> = ({
   loading,
   ClearFilter,
 }) => {
-  console.log(data, filter);
-  useEffect(() => {
+   useEffect(() => {
     loadGif();
     // eslint-disable-next-line
   }, [filter]);
+   const [start, setStart] = useState(0)
+   const [next, setNext] = useState(100);
 
   const handlePaginationChange = (_: any, arg: any) => {
-    loadnext(arg.activePage);
+    setStart(start+100)
+    setNext(next + 100);
+    // loadnext(next, data);
   };
 
   const PaginationExamplePagination = () => (
     <Pagination
       defaultActivePage={1}
       onPageChange={handlePaginationChange}
-      totalPages={67}
+      totalPages={data.length/100}
     />
   );
 
@@ -51,12 +55,18 @@ const DisplayGifs: React.FC<props> = ({
       ) : (
         <div className="gif-content">
           {(filter.length &&
-            filter.map((item: any) => <GifItem key={item.id} item={item} />)) ||
+            filter.map((item: any, index: number) => (
+              <GifItem key={index} item={item} />
+            ))) ||
             (data.length > 0 &&
-              data.map((item: any) => <GifItem key={item.id} item={item} />))}
+              data
+                .slice(start, next)
+                .map((item: any, index: number) => (
+                  <GifItem key={index} index={index} image={item} />
+                )))}
         </div>
       )}
-      <Grid centered>
+      <Grid centered className="pagination">
         <PaginationExamplePagination />
       </Grid>
     </GifWrapper>

@@ -10,7 +10,6 @@ import {
   LOAD_ERROR,
   LOAD_NEXT,
 } from "../types";
-import { BASE_URL, API_KEY } from "../../../utils/";
 
 interface queryInput {
   input: string;
@@ -23,11 +22,10 @@ interface queryInput {
 
 export const loadGifs = () => async (dispatch: any) => {
   try {
-    const res = await axios.get(BASE_URL + `/trending?api_key=${API_KEY}`);
-    console.log(res.data);
+    const res = await axios.get("https://dog.ceo/api/breed/hound/images");
     dispatch({
       type: GET_SUCCESS,
-      payload: res.data.data,
+      payload: res.data.message,
     });
   } catch (error) {
     dispatch({
@@ -40,12 +38,10 @@ export const loadGifs = () => async (dispatch: any) => {
 
 export const FilterGifs = (input: string) => async (dispatch: any) => {
   try {
-    const res = await axios.get(
-      BASE_URL + `/search?api_key=${API_KEY}&q=${input}`
-    );
+    const res = await axios.get(`https://dog.ceo/api/breed/${input}/images`);
     dispatch({
       type: FILTER_SUCCESS,
-      payload: res.data.data,
+      payload: res.data.message,
     });
   } catch (error) {
     dispatch({
@@ -56,36 +52,39 @@ export const FilterGifs = (input: string) => async (dispatch: any) => {
   }
 };
 
-export const loadSingleGifs = (id: any) => async (dispatch: any) => {
+export const loadSingleGifs = (id: any, data: any) => async (dispatch: any) => {
   try {
-    console.log("loader", id);
-    const res = await axios.get(
-      `https://api.giphy.com/v1/gifs/${id}?api_key=${API_KEY}`
-    );
-    console.log(res.data);
+    // eslint-disable-next-line
+    const res = data.find((item: string, index: number) => {
+      if (index === id) {
+        return item;
+      }
+    });
+    console.log(res);
+    console.log(data);
     dispatch({
       type: GET_SINGLE_SUCCESS,
-      payload: res.data.data,
+      payload: res,
     });
   } catch (error) {
     dispatch({
       type: GET_SINGLE_FAIL,
-      payload: error.response,
+      payload: 'something went wrong',
     });
     console.log(error.response);
   }
 };
 
-export const loadnext = (page: any) => async (dispatch: any) => {
+export const loadnext = (offset: number, data: any[]) => async (
+  dispatch: any
+) => {
   try {
-    console.log("loader", page);
-    const res = await axios.get(
-      BASE_URL + `/trending?api_key=${API_KEY}&offset=${page}`
-    );
-    console.log(res.data);
+    // console.log("loader", page);
+    const res = await data.slice(offset, offset + 100);
+    console.log(res);
     dispatch({
       type: LOAD_NEXT,
-      payload: res.data.data,
+      payload: res,
     });
   } catch (error) {
     dispatch({

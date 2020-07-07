@@ -3,9 +3,10 @@ import styled from "styled-components";
 const SingleGifWrapper = styled.div`
   padding: 8rem;
   background: linear-gradient(to right bottom, #3b0831, #450b2a);
+  height:100vh;
   .container {
     display: flex;
-    /* justify-content:center; */
+    justify-content:center;
     align-items: center;
   }
   .right,
@@ -14,6 +15,7 @@ const SingleGifWrapper = styled.div`
   }
   .left {
     position: relative;
+    
   }
   p {
     color: white;

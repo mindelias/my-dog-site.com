@@ -6,14 +6,27 @@ const GifWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin: 2.5rem 0rem;
+    width:100%;
   }
   .gif-item {
     flex-basis: 20%;
     margin: 1.5rem;
     position: relative;
   }
-  h5{
-    margin-top:0
+  .img-reaction {
+    &:hover {
+      transform: scaleY(1.1);
+      border: 5px solid white;
+      height:auto;
+      width:100%;
+    }
+  }
+  h5 {
+    margin-top: 0;
+  }
+  .pagination {
+    margin-top: 3rem;
   }
   /* .caption {
     position: absolute;

@@ -11,7 +11,7 @@ import {
 } from "../types";
 export interface Istate {
   dataArray: any[];
-  dataObj: {};
+  dataObj: '';
   loading: boolean;
   error: boolean;
   filter: any[];

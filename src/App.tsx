@@ -22,7 +22,7 @@ function App() {
             <Navbar />
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/gif/:id" component={SingleGif} />
+              <Route exact path="/gif/:index" component={SingleGif} />
             </Switch>
           </Router>
         </React.Fragment>

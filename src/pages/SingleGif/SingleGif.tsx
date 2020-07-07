@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { loadSingleGifs } from "../../components/redux/Giphy/giphy.action";
+import {
+  loadSingleGifs,
+  loadGifs,
+} from "../../components/redux/Giphy/giphy.action";
 import SingleGifWrapper from "./style";
 
 interface props {
@@ -9,68 +12,39 @@ interface props {
   item: any;
   error: boolean;
   filter: any;
-  load: (args: any) => void;
+  data: any;
+  loadGif: () => void;
+  load: (args: number, arg2: any) => void;
   ClearFilter: () => void;
 }
 
-const SingleGif: React.FC<props> = ({ load, item, loading }) => {
-  const { id } = useParams();
-  console.log(id);
+const SingleGif: React.FC<props> = ({ loadGif, load, data, item, loading }) => {
+  const { index } = useParams();
+
+  console.log(index);
   console.log(item);
 
   useEffect(() => {
-    load(id);
+    loadGif();
+    load(+index, data);
+    // load(id, data);
     // eslint-disable-next-line
-  }, [id]);
+  }, [index]);
 
   return (
     <SingleGifWrapper>
-      <div className="container" key={item ? item.id : ""}>
+      <div className="container" key={item}>
         <div className="left">
-          <img
-            src={item ? item.images.downsized_large.url : ""}
-            alt={item ? item.username : ""}
-          />
-          <figcaption className="caption">
+          <img src={item ? item : ""} alt="dogs" />
+          {/* <figcaption className="caption">
             {item ? item.user.display_name : ""}
-          </figcaption>
+          </figcaption> */}
         </div>
         <div className="right">
           <p>
-            <span>username: </span>
-            {item ? item.username : ""}
+            {/* <span>username: </span>
+            {item ? item.username : ""} */}
           </p>
-          <p>
-            {" "}
-            <span>source :</span>
-            {item ? item.source : ""}
-          </p>
-          <p>
-            {" "}
-            <span>Title:</span> {item ? item.source : ""}
-          </p>
-          <p>
-            <span>Rating:</span> {item ? item.rating : ""}
-          </p>
-          <p>
-            <span>source tld:</span> {item ? item.source_tld : ""}
-          </p>
-          <p>
-            <span>source post:</span> {item ? item.source_post_url : ""}
-          </p>
-          <p>
-            <span>Date:</span> {item ? item.import_datetime : ""}
-          </p>
-          <p>
-            <span>is_verified:</span> {item ? item.user.is_verified : ""}
-          </p>
-
-          <p></p>
-          {/* <ul>
-           {item.episode.map((item, index) => (
-            <li key={index}>{item}</li>
-           ))}
-        </ul> */}
         </div>
       </div>
     </SingleGifWrapper>
@@ -78,9 +52,13 @@ const SingleGif: React.FC<props> = ({ load, item, loading }) => {
 };
 
 const mapStateToProps = (state: any) => ({
+  data: state.Giphy.dataArray,
   item: state.Giphy.dataObj,
   error: state.Giphy.error,
   loading: state.Giphy.loading,
 });
 
-export default connect(mapStateToProps, { load: loadSingleGifs })(SingleGif);
+export default connect(mapStateToProps, {
+  load: loadSingleGifs,
+  loadGif: loadGifs,
+})(SingleGif);
