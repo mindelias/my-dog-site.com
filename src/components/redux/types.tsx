@@ -7,3 +7,4 @@ export const GET_SINGLE_FAIL = "GET_SINGLE_FAIL";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 export const LOAD_NEXT = "LOAD_NEXT";
 export const LOAD_ERROR = "LOAD_ERROR";
+export const SET_LOADING = "SET_LOADING";

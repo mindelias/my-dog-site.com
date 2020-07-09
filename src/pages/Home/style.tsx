@@ -10,6 +10,13 @@ const HomeWrapper = styled.div`
     margin: 2rem 0rem;
     width: 100%;
   }
+
+  @media (max-width: 1200px) {
+    padding: 3rem;
+  }
+  @media (max-width: 900px) {
+    padding: 3rem;
+  }
 `;
 
 export default HomeWrapper;

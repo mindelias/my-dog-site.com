@@ -15,7 +15,7 @@ const SingleDogImage= lazy(() => import("./pages/SingleDogImage/SingleDogImage")
  
 function App() {
   return (
-    <Suspense fallback ='LOADING'>
+    <Suspense fallback =''>
       <Provider store={store}>
         <React.Fragment>
           <Router>

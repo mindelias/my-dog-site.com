@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import { connect } from "react-redux";
-import { loadGifs, ClearFilter, loadnext } from "../redux/ImagesRedux/getImages.action";
+import {
+  loadGifs,
+  ClearFilter,
+  loadnext,
+} from "../redux/ImagesRedux/getImages.action";
 import GifItem from "./ImageCard";
 import GifWrapper from "./style";
 import Placeholder from "../Placeholder";
-import { Grid, Pagination } from "semantic-ui-react";
-import { useState } from "react";
 
 interface props {
-  loadnext: (args: any, args2:any) => void;
+  loadnext: (args: any, args2: any) => void;
   loading: boolean;
   data: any;
   error: boolean;
@@ -26,49 +29,40 @@ const DisplayGifs: React.FC<props> = ({
   loading,
   ClearFilter,
 }) => {
-   useEffect(() => {
+  const history = useHistory();
+
+  useEffect(() => {
     loadGif();
     // eslint-disable-next-line
   }, [filter]);
-   const [start, setStart] = useState(0)
-   const [next, setNext] = useState(100);
 
-  const handlePaginationChange = (_: any, arg: any) => {
-    setStart(start+100)
-    setNext(next + 100);
-    // loadnext(next, data);
-  };
-
-  const PaginationExamplePagination = () => (
-    <Pagination
-      defaultActivePage={1}
-      onPageChange={handlePaginationChange}
-      totalPages={data.length/100}
-    />
-  );
+  // const handlePaginationChange = (_: any, arg: any) => {
+  //   setActive(arg.activePage);
+  //   setStart(start + 100);
+  //   setNext(next + 100);
+  // };
 
   return (
     <GifWrapper className="gif-container">
       {error && <h1 className="">.....something went wrong</h1>}
-      {data && data.length === 0 && loading ? (
+      {loading ? (
         <Placeholder />
       ) : (
         <div className="gif-content">
           {(filter.length &&
             filter.map((item: any, index: number) => (
-              <GifItem key={index} item={item} />
+              <GifItem key={index} image={item} />
             ))) ||
             (data.length > 0 &&
-              data
-                .slice(start, next)
-                .map((item: any, index: number) => (
-                  <GifItem key={index} index={index} image={item} />
-                )))}
+              data.map((item: any, index: number) => (
+                <GifItem
+                  key={index}
+                  image={item}
+                  click={() => history.push(`/gif/${index}`, { item })}
+                />
+              )))}
         </div>
       )}
-      <Grid centered className="pagination">
-        <PaginationExamplePagination />
-      </Grid>
     </GifWrapper>
   );
 };

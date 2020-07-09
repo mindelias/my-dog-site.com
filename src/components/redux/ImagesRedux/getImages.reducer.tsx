@@ -7,7 +7,7 @@ import {
   GET_SINGLE_SUCCESS,
   CLEAR_FILTER,
   LOAD_NEXT,
-  LOAD_ERROR
+  LOAD_ERROR, SET_LOADING
 } from "../types";
 export interface Istate {
   dataArray: any[];
@@ -19,13 +19,18 @@ export interface Istate {
 const initialState = {
   dataArray: [],
   dataObj: null,
-  loading: true,
+  loading: false,
   error: false,
   filter: [],
 };
 
 function GiphyReducer(state = initialState, action: any) {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.isLoading,
+      };
     case GET_SUCCESS:
       return {
         ...state,

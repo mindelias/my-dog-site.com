@@ -9,25 +9,29 @@ import {
   CLEAR_FILTER,
   LOAD_ERROR,
   LOAD_NEXT,
+  SET_LOADING
 } from "../types";
 
 interface queryInput {
   input: string;
 }
-// interface AmountType {
-//   amount: string;
-//   accountNumber: string;
-// }
-// type depositType = Pick<AmountType, "amount">;
+ export const loading = (isLoading: boolean) => ({
+   type: SET_LOADING,
+   isLoading,
+ });
 
 export const loadGifs = () => async (dispatch: any) => {
+  dispatch(loading(true));
   try {
     const res = await axios.get("https://dog.ceo/api/breed/hound/images");
+    localStorage.setItem('Array', res.data.message)
     dispatch({
       type: GET_SUCCESS,
       payload: res.data.message,
     });
+    dispatch(loading(false));
   } catch (error) {
+    dispatch(loading(false));
     dispatch({
       type: GET_FAIL,
       payload: error.response,
@@ -37,13 +41,16 @@ export const loadGifs = () => async (dispatch: any) => {
 };
 
 export const FilterGifs = (input: string) => async (dispatch: any) => {
+  dispatch(loading(true));
   try {
     const res = await axios.get(`https://dog.ceo/api/breed/${input}/images`);
     dispatch({
       type: FILTER_SUCCESS,
       payload: res.data.message,
     });
+    dispatch(loading(false));
   } catch (error) {
+    dispatch(loading(false));
     dispatch({
       type: FILTER_FAIL,
       payload: error.response,
@@ -59,6 +66,7 @@ export const loadSingleGifs = (id: any, data: any) => async (dispatch: any) => {
       if (index === id) {
         return item;
       }
+    
     });
     console.log(res);
     console.log(data);

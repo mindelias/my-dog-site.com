@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   loadSingleGifs,
   loadGifs,
@@ -18,24 +18,19 @@ interface props {
   ClearFilter: () => void;
 }
 
-const SingleGif: React.FC<props> = ({ loadGif, load, data, item, loading }) => {
-  const { index } = useParams();
+const SingleGif: React.FC<props> = () => {
+  const history = useHistory();
 
-  console.log(index);
-  console.log(item);
-
-  useEffect(() => {
-    loadGif();
-    load(+index, data);
-    // load(id, data);
-    // eslint-disable-next-line
-  }, [index]);
+  console.log(history.location.state);
+  const image: { item: string } | undefined = history.location.state as {
+    item: string;
+  };
 
   return (
     <SingleGifWrapper>
-      <div className="container" key={item}>
+      <div className="container">
         <div className="left">
-          <img src={item ? item : ""} alt="dogs" />
+          <img src={image && image.item} alt="dogs" />
         </div>
         <div className="right">
           <h2>General Characteristics</h2>

@@ -10,13 +10,24 @@ const GifWrapper = styled.div`
     width: 100%;
   }
   .gif-item {
-    flex-basis: 20%;
+    flex-basis: 30%;
     margin: 1rem 1.5rem;
     position: relative;
+    height: 400px;
   }
+  .img-container {
+    min-width: 50%;
+    padding-bottom: 56.25%;
+    position: relative;
+    background: #fff;
+    /* height:auto; */
+  }
+
   .img-reaction {
-    max-height: 400px;
-    max-width: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     &:hover {
       transform: scaleY(1.1);
       border: 10px solid #f5fdff;
@@ -30,14 +41,44 @@ const GifWrapper = styled.div`
   .pagination {
     margin-top: 3rem;
   }
-  /* .caption {
-    position: absolute;
-    bottom: 20%;
-    font-size: 1.5rem;
-    font-weight: 900;
-    left: 10%;
-    color: white;
-  } */
+  @media (max-width: 900px) {
+    .gif-content {
+      margin: 1.2rem 0rem;
+    }
+    .gif-item {
+      flex-basis: 45%;
+      max-height: 200px;
+    }
+
+    .img-reaction {
+      /* max-height: 200px; */
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gif-content {
+      margin: 0rem 0rem;
+    }
+    .gif-item {
+      flex-basis: 100%;
+      height: 200px;
+    }
+    .img-container {
+      min-width: 100%;
+      padding-bottom: 20%;
+    }
+    .img-reaction {
+      max-height: 200px;
+    }
+  }
+  @media (max-width: 485px) {
+    .gif-content {
+      margin: 0rem 0rem;
+    }
+    .gif-item {
+      flex-basis: 100%;
+    }
+  }
 `;
 
 export default GifWrapper;
