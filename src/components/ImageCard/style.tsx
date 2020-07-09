@@ -11,13 +11,12 @@ const GifWrapper = styled.div`
   }
   .gif-item {
     flex-basis: 30%;
-    margin: 1rem 1.5rem;
+    margin: 2.5rem 1.5rem;
     position: relative;
-    height: 400px;
+    max-height: 500px !important;
   }
   .img-container {
     min-width: 50%;
-    padding-bottom: 56.25%;
     position: relative;
     background: #fff;
     /* height:auto; */
@@ -28,6 +27,7 @@ const GifWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100%;
+    max-height: 400px !important;
     &:hover {
       transform: scaleY(1.1);
       border: 10px solid #f5fdff;

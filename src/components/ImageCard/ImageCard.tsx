@@ -2,12 +2,12 @@ import React from "react";
 import LazyLoad from "react-lazy-load";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const MyImage = ({ image,click }: Partial<{ image: string, click:any }>) => {
+const MyImage = ({ image, click }: Partial<{ image: string; click: any }>) => {
   return (
     <div className="gif-item" onClick={click}>
       <LazyLoad
-        width='100%'
-        height='100%'
+        width="100%"
+        height={350}
         debounce={false}
         throttle={250}
         offsetVertical={400}
