@@ -9,22 +9,22 @@ import {
   CLEAR_FILTER,
   LOAD_ERROR,
   LOAD_NEXT,
-  SET_LOADING
+  SET_LOADING,
 } from "../types";
 
 interface queryInput {
   input: string;
 }
- export const loading = (isLoading: boolean) => ({
-   type: SET_LOADING,
-   isLoading,
- });
+export const loading = (isLoading: boolean) => ({
+  type: SET_LOADING,
+  isLoading,
+});
 
 export const loadGifs = () => async (dispatch: any) => {
   dispatch(loading(true));
   try {
     const res = await axios.get("https://dog.ceo/api/breed/hound/images");
-    localStorage.setItem('Array', res.data.message)
+    localStorage.setItem("Array", res.data.message);
     dispatch({
       type: GET_SUCCESS,
       payload: res.data.message,
@@ -50,12 +50,13 @@ export const FilterGifs = (input: string) => async (dispatch: any) => {
     });
     dispatch(loading(false));
   } catch (error) {
+    console.log(error.data);
     dispatch(loading(false));
     dispatch({
       type: FILTER_FAIL,
-      payload: error.response,
+      payload: error.response.data.message,
     });
-    console.log(error.response);
+    console.log(error.response.data.message);
   }
 };
 
@@ -66,7 +67,6 @@ export const loadSingleGifs = (id: any, data: any) => async (dispatch: any) => {
       if (index === id) {
         return item;
       }
-    
     });
     console.log(res);
     console.log(data);

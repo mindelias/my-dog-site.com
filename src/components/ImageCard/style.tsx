@@ -9,6 +9,9 @@ const GifWrapper = styled.div`
     margin: 2.5rem 0rem;
     width: 100%;
   }
+  .error{
+    color:red;
+  }
   .gif-item {
     flex-basis: 30%;
     margin: 2.5rem 1.5rem;

@@ -7,13 +7,13 @@ import {
   GET_SINGLE_SUCCESS,
   CLEAR_FILTER,
   LOAD_NEXT,
-  LOAD_ERROR, SET_LOADING
+  LOAD_ERROR, SET_LOADING, FILTER_FAIL
 } from "../types";
 export interface Istate {
   dataArray: any[];
   dataObj: '';
   loading: boolean;
-  error: boolean;
+  error: null;
   filter: any[];
 }
 const initialState = {
@@ -66,6 +66,7 @@ function GiphyReducer(state = initialState, action: any) {
 
     case GET_FAIL:
     case LOAD_ERROR:
+    case FILTER_FAIL:
     case GET_SINGLE_FAIL:
       return {
         ...state,

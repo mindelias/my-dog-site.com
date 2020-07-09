@@ -14,7 +14,7 @@ interface props {
   loadnext: (args: any, args2: any) => void;
   loading: boolean;
   data: any;
-  error: boolean;
+  error: any;
   filter: any;
   loadGif: () => void;
   ClearFilter: () => void;
@@ -32,9 +32,12 @@ const DisplayGifs: React.FC<props> = ({
   const history = useHistory();
 
   useEffect(() => {
+    if (error) {
+      console.log(error);
+    }
     loadGif();
     // eslint-disable-next-line
-  }, [filter]);
+  }, [filter, error]);
 
   // const handlePaginationChange = (_: any, arg: any) => {
   //   setActive(arg.activePage);
@@ -44,25 +47,32 @@ const DisplayGifs: React.FC<props> = ({
 
   return (
     <GifWrapper className="gif-container">
-      {error && <h1 className="">.....something went wrong</h1>}
+      {/* {error && (
+        <h1 className="error">Breed not found or breed does nto exist</h1>
+      )} */}
       {loading ? (
-        <Placeholder />
-      ) : (
-        <div className="gif-content">
-          {(filter.length &&
+      <Placeholder />) : (
+      <div className="gif-content">
+        {(error && (
+          <h1 className="error">Breed not found | breed does not exist</h1>
+        )) ||
+          (filter.length > 0 &&
             filter.map((item: any, index: number) => (
               <GifItem key={index} image={item} />
             ))) ||
-            (data.length > 0 &&
-              data.map((item: any, index: number) => (
-                <GifItem
-                  key={index}
-                  image={item}
-                  click={() => history.push(`/gif/${index}`, { item })}
-                />
-              )))}
-        </div>
+          (data.length > 0 &&
+            data.map((item: any, index: number) => (
+              <GifItem
+                key={index}
+                image={item}
+                click={() => history.push(`/gif/${index}`, { item })}
+              />
+            )))}
+      </div>
       )}
+      <button>
+        <a href="/">Go back</a>
+      </button>
     </GifWrapper>
   );
 };

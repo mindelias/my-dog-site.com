@@ -10,7 +10,7 @@ interface props {
   load: () => void;
   loading: boolean;
   data: any;
-  error: boolean;
+  error: any;
 }
 
 const Search: React.FC<props> = ({ filter, clear ,load}) => {
