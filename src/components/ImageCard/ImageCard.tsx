@@ -11,6 +11,7 @@ const MyImage = ({ image, click }: Partial<{ image: string; click: any }>) => {
         debounce={false}
         throttle={250}
         offsetVertical={400}
+        className="responsiveness"
       >
         <div className="img-container">
           <img src={image} alt="Lazy Load Example" className="img-reaction" />

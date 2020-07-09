@@ -46,16 +46,31 @@ const GifWrapper = styled.div`
       margin: 1.2rem 0rem;
     }
     .gif-item {
-      flex-basis: 45%;
+      flex-basis: 48%;
       max-height: 200px;
     }
 
     .img-reaction {
-      /* max-height: 200px; */
+      max-height: 350px;
     }
   }
 
   @media (max-width: 600px) {
+    .gif-content {
+      margin: 1.2rem 0rem;
+    }
+    .gif-item {
+      flex-basis: 38%;
+      max-height: 200px;
+      max-width:70%;
+    }
+
+    .img-reaction {
+      max-height: 350px;
+    }
+  }
+
+  /* @media (max-width: 600px) {
     .gif-content {
       margin: 0rem 0rem;
     }
@@ -70,13 +85,25 @@ const GifWrapper = styled.div`
     .img-reaction {
       max-height: 200px;
     }
-  }
-  @media (max-width: 485px) {
+  } */
+  @media (max-width: 600px) {
     .gif-content {
       margin: 0rem 0rem;
     }
     .gif-item {
       flex-basis: 100%;
+      max-height: 300px !important;
+      margin: 2rem 0rem;
+    }
+    .img-container {
+      max-width: 100%;
+      padding-bottom: 20%;
+    }
+    .responsiveness {
+      max-height: 300px !important;
+    }
+    .img-reaction {
+      max-height: 300px !important;
     }
   }
 `;
