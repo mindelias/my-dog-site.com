@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 import {
   loadSingleGifs,
   loadGifs,
@@ -19,18 +18,14 @@ interface props {
 }
 
 const SingleGif: React.FC<props> = () => {
-  const history = useHistory();
-
-  console.log(history.location.state);
-  const image: { item: string } | undefined = history.location.state as {
-    item: string;
-  };
+   
+  const item = localStorage.getItem("item");
 
   return (
     <SingleGifWrapper>
       <div className="container">
         <div className="left">
-          <img src={image && image.item} alt="dogs" />
+          <img src={item ? item : ""} alt="dogs" />
         </div>
         <div className="right">
           <h2>General Characteristics</h2>

@@ -65,7 +65,10 @@ const DisplayGifs: React.FC<props> = ({
               <GifItem
                 key={index}
                 image={item}
-                click={() => history.push(`/gif/${index}`, { item })}
+                click={() => {
+                  localStorage.setItem('item', item)
+                  history.push(`/gif/${index}`)
+                }}
               />
             )))}
       </div>
